@@ -1,0 +1,133 @@
+<html>
+<head>
+    <title>CapyMineStudio — Главная</title>
+    <style>
+        /* Стили для меню */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            padding: 12px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        img {
+            width: 400px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+
+        .nav-logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .nav-logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: #2d3436;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-link:hover {
+            background: rgba(52, 152, 219, 0.1);
+            color: #2980b9;
+            box-shadow: 0 2px 12px rgba(52, 152, 219, 0.15);
+        }
+
+        .nav-link.cta {
+            background: #3498db;
+            color: white !important;
+            padding: 12px 25px;
+            border-radius: 10px;
+            margin-left: 20px;
+        }
+
+        .nav-link.cta:hover {
+            background: #2980b9;
+            box-shadow: 0 4px 16px rgba(52, 152, 219, 0.3);
+        }
+
+        /* Основной контент */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            padding-top: 80px;
+            background: #f8f9fa;
+        }
+
+        .content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 50px 30px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 2.8em;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка с меню -->
+    <header class="header">
+        <div class="nav-container">
+            <nav class="nav-links">
+                <a href="#features" class="nav-link">Возможности</a>
+                <a href="#pricing" class="nav-link">Тарифы</a>
+                <a href="#contacts" class="nav-link">Контакты</a>
+            </nav>
+            <div class="nav-links">
+                <a href="#login" class="nav-link">Войти</a>
+                <a href="#register" class="nav-link cta">Начать бесплатно</a>
+                <img src="capymine.jpg" alt="Логотип" class="nav-logo">
+            </div>
+        </div>
+    </header>
+
+
+    <!-- Основной контент -->
+    <div class="content">
+        <h1>Создай уникальный Minecraft-сервер</h1>
+        <p>Профессиональные инструменты для управления и кастомизации</p>
+    </div>
+</body>
+</html>

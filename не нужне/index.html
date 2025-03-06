@@ -1,0 +1,354 @@
+<html>
+<head>
+    <title>Главная</title>
+    <style>
+        .container {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            margin: 100px;
+            min-height: 100vh;
+        }
+
+        img {
+            width: 400px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .text-animation {
+            font-family: 'Courier New', monospace;
+            font-size: 32px;
+            color: #2c3e50;
+            width: 600px;
+            text-align: right;
+            overflow: hidden;
+        }
+
+        .text-wrapper {
+            display: inline-block;
+            position: relative;
+            transition: transform 0.5s ease, opacity 0.3s;
+            transform: translateX(100%);
+            opacity: 0;
+        }
+
+        .text-wrapper.active {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .text-wrapper.removing {
+            transform: translateX(-100%);
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="capymine.jpg">
+        <div class="text-animation">
+            <div class="text-wrapper" id="textElement"></div>
+        </div>
+    </div>
+
+    <script>
+        const phrases = [
+            "CapyMineStudio",
+            "Сделай свой сервер Уникальным",
+            "Сотни модов и плагинов",
+            "Начни Бесплатно",
+            "Без знаний программирования"
+        ];
+
+        const textElement = document.getElementById('textElement');
+        let phraseIndex = 0;
+        let isAnimating = true;
+        let lastScrollPosition = window.pageYOffset;
+        let animationTimeout;
+
+        function startAnimation() {
+            if (!isAnimating) return;
+            
+            textElement.textContent = phrases[phraseIndex];
+            textElement.classList.add('active');
+
+            animationTimeout = setTimeout(() => {
+                textElement.classList.remove('active');
+                textElement.classList.add('removing');
+                
+                animationTimeout = setTimeout(() => {
+                    textElement.classList.remove('removing');
+                    phraseIndex = (phraseIndex + 1) % phrases.length;
+                    startAnimation();
+                }, 500);
+            }, 2000);
+        }
+
+        function stopAnimation() {
+            isAnimating = false;
+            clearTimeout(animationTimeout);
+            textElement.classList.remove('active', 'removing');
+            phraseIndex = 0;
+            textElement.textContent = phrases[0];
+            textElement.classList.add('active');
+        }
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > lastScrollPosition) {
+                // Скролл вниз
+                if (isAnimating) stopAnimation();
+            } else {
+                // Скролл вверх
+                if (!isAnimating) {
+                    isAnimating = true;
+                    startAnimation();
+                }
+            }
+            lastScrollPosition = currentScroll;
+        });
+
+        // Запуск анимации при загрузке
+        startAnimation();
+    </script>
+    <style>
+        .container {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            margin: 20px;
+            padding-top: 40px;
+            min-height: auto;
+        }
+    
+        img {
+            width: 300px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+    
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</body>
+<head>
+    <title>CapyMineStudio — Главная</title>
+    <style>
+        /* Стили для меню */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            padding: 12px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .nav-logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .nav-logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: #2d3436;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-link:hover {
+            background: rgba(52, 152, 219, 0.1);
+            color: #2980b9;
+            box-shadow: 0 2px 12px rgba(52, 152, 219, 0.15);
+        }
+
+        .nav-link.cta {
+            background: #3498db;
+            color: white !important;
+            padding: 12px 25px;
+            border-radius: 10px;
+            margin-left: 20px;
+        }
+
+        .nav-link.cta:hover {
+            background: #2980b9;
+            box-shadow: 0 4px 16px rgba(52, 152, 219, 0.3);
+        }
+
+        /* Основной контент */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            padding-top: 80px;
+            background: #f8f9fa;
+        }
+
+        .content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 50px 30px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 2.8em;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Меню</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: white;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background: #3498db;
+            margin-right: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            margin-left: auto;
+        }
+
+        .nav-item {
+            color: #2c3e50;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+
+        .nav-item:hover {
+            background: rgba(52, 152, 219, 0.1);
+            color: #3498db;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-left: 2rem;
+        }
+
+        .btn {
+            padding: 0.6rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .btn-login {
+            background: none;
+            color: #3498db;
+        }
+
+        .btn-primary {
+            background: #3498db;
+            color: white;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .nav-item:not(.btn) {
+                display: none;
+            }
+            .navbar {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo"></div>
+        <div class="nav-links"
+            <a href="#contacts" class="nav-item">Контакты</a>
+            <a href="#docs" class="nav-item">Документация</a>
+            <a href="#pricing" class="nav-item">Тарифы</a>
+            <div class="auth-buttons">
+                <button class="btn btn-login">Войти</button>
+                <button class="btn btn-primary">Начать бесплатно</button>
+            </div>
+        </div>
+    </nav>
+
+ 
+    </div>
+</body>
+</html>

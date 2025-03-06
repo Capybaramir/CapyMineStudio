@@ -1,0 +1,120 @@
+<html>
+<head>
+    <title>CapyMineStudio.ru</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: #d6d6d6;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+
+        /* Фиксированное позиционирование для логотипа */
+        .logo {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -60%);
+            width: 160px;
+            height: 160px;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(0, 150, 255, 0.4);
+            animation: glow 2s ease-in-out infinite;
+            z-index: 2;
+        }
+
+        /* Позиционирование текста под логотипом */
+        .loading-text {
+            position: fixed;
+            top: calc(50% + 100px);
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2em;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(0, 150, 255, 0.5);
+            z-index: 1;
+        }
+
+        /* Остальные стили без изменений */
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 25px;
+        }
+
+        .loading-text::after {
+            content: '';
+            animation: dots 1.5s infinite steps(4);
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 30px rgba(0, 150, 255, 0.4); }
+            50% { box-shadow: 0 0 50px rgba(0, 150, 255, 0.8), 0 0 60px rgba(0, 150, 255, 0.6); }
+        }
+
+        @keyframes dots {
+            0% { content: ''; }
+            25% { content: '.'; }
+            50% { content: '..'; }
+            75% { content: '...'; }
+            100% { content: ''; }
+        }
+
+        .sparkles {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        .sparkle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            animation: sparkle 1s linear infinite;
+        }
+
+        @keyframes sparkle {
+            0% { transform: translateY(0) translateX(0); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-100px) translateX(50px); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="logo">
+        <img src="assets/capymine.jpg" alt="Логотип">
+        <div class="sparkles"></div>
+    </div>
+
+    <script>
+        // Автоматическая генерация снежинок
+        setInterval(() => {
+            const sparkles = document.querySelector('.sparkles');
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.style.left = Math.random() * 100 + '%';
+            sparkle.style.top = '100%';
+            sparkles.appendChild(sparkle);
+            
+            setTimeout(() => sparkle.remove(), 1000);
+        }, 300);
+
+        // Перенаправление через 4 секунды
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                window.location.href = "основное.html";
+            }, 4000);
+        });
+    </script>
+</body>
+</html>

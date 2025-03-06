@@ -1,0 +1,37 @@
+<div class="modal-overlay" id="registerModal">
+    <div class="modal">
+        <h2 style="text-align: center; margin-bottom: 30px;">Начните бесплатно</h2>
+        <div class="social-auth">
+            <button class="social-btn email-btn" onclick="authWithEmail()">
+                📧 Почта
+            </button>
+            <button class="social-btn yandex-btn" onclick="authWithYandex()">
+                Яндекс
+                <div class="container">
+                    <img src="zndex.png">
+                    <style>
+                        img {
+            width: 50px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+                    </style>
+
+
+                    <div class="text-animation">
+                        <div class="text-wrapper" id="textElement"></div>
+                    </div> 
+            </button>
+            <button class="social-btn vk-btn" onclick="authWithVK()">
+                ВКонтакте
+            </button>
+            <button class="social-btn microsoft-btn" onclick="authWithMicrosoft()">
+                Microsoft
+            </button>
+        </div>
+        <p style="text-align: center; color: #666; margin-top: 20px;">
+            Нажимая «Регистрация», вы принимаете условия использования
+        </p>
+    </div>
+</div>
