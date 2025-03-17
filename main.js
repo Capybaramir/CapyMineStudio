@@ -3,7 +3,7 @@ const phrases = [
     "Создавайте уникальные сервера с легкостью!",
     "Это не хостинг, это система сервисов",
     "Быстрое подключение к серверу",
-    "Кодирование ",
+    "Без Кодирование ",
     "Без знаний программирования"
 ];
 
@@ -11,19 +11,14 @@ const animatedText = document.getElementById('animatedText');
 let phraseIndex = 0;
 
 function changeText() {
-    // Плавное исчезновение текста
     animatedText.style.opacity = 0;
     setTimeout(() => {
-        // Меняем текст
         animatedText.textContent = phrases[phraseIndex];
-        // Плавное появление текста
         animatedText.style.opacity = 1;
-        // Переход к следующему тексту
         phraseIndex = (phraseIndex + 1) % phrases.length;
-    }, 1000); // Задержка для исчезновения текста
+    }, 1000);
 }
 
-// Запускаем смену текста каждые 4 секунды
 setInterval(changeText, 4000);
 
 // Управление модальными окнами
@@ -41,7 +36,6 @@ function closeModal() {
     });
 }
 
-// Закрытие модалок при клике вне
 window.onclick = function(event) {
     if (event.target.classList.contains('modal-overlay')) {
         closeModal();
@@ -49,34 +43,67 @@ window.onclick = function(event) {
 }
 
 // Обработка формы регистрации
-document.getElementById('registrationForm').addEventListener('submit', (e) => {
+document.getElementById('registrationForm').addEventListener('submit', async (e) => {
     e.preventDefault();
-    const email = e.target.querySelector('input[type="email"]').value;
-    const password = e.target.querySelector('input[type="password"]').value;
-    if (!validateEmail(email)) {
-        alert('Введите корректный email');
-        return;
+    const username = document.getElementById('username').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    try {
+        const response = await fetch('/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username, email, password }),
+        });
+
+        const data = await response.json();
+        if (response.ok) {
+            alert(data.message);
+            closeModal();
+        } else {
+            alert(data.error);
+        }
+    } catch (err) {
+        alert('Ошибка при регистрации');
     }
-    if (password.length < 6) {
-        alert('Пароль должен быть не менее 6 символов');
-        return;
-    }
-    console.log('Регистрация:', { email, password });
-    alert('Регистрация успешна!');
-    closeModal();
 });
 
 // Обработка формы входа
-document.getElementById('loginForm').addEventListener('submit', (e) => {
+document.getElementById('loginForm').addEventListener('submit', async (e) => {
     e.preventDefault();
-    const email = e.target.querySelector('input[type="email"]').value;
-    const password = e.target.querySelector('input[type="password"]').value;
-    console.log('Вход:', { email, password });
-    alert('Вход выполнен!');
-    closeModal();
+    const email = document.getElementById('loginEmail').value;
+    const password = document.getElementById('loginPassword').value;
+
+    try {
+        const response = await fetch('/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, password }),
+        });
+
+        const data = await response.json();
+        if (response.ok) {
+            alert(data.message);
+            closeModal();
+        } else {
+            alert(data.error);
+        }
+    } catch (err) {
+        alert('Ошибка при входе');
+    }
 });
 
 // Валидация email
 function validateEmail(email) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
+
+// Адаптация для мобильных устройств
+document.getElementById('mobileMenu').addEventListener('click', () => {
+    const navLinks = document.querySelector('.nav-links');
+    navLinks.classList.toggle('active');
+});
